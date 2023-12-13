@@ -1,3 +1,3 @@
-__all__ = ["find_optimal_data_types"]
+__all__ = ["optimize_dtypes"]
 
-from .find_optimal_data_types import find_optimal_data_types
+from .data_types import optimize_dtypes

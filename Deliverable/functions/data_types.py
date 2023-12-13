@@ -1,7 +1,6 @@
 import numpy as np
-import pandas as pd
 
-def find_optimal_data_types(df):
+def optimize_dtypes(df):
   """
   Finds the optimal data type for each variable in a DataFrame. The 'np.iinfo(), np.finfo()' functions are used to obtain the minimum and maximum values for the data types accurately, ensuring better compatibility across different systems.
 
