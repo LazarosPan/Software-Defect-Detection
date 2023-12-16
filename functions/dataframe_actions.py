@@ -45,6 +45,8 @@ def df_clean(df):
     """
     df_columns = df.columns.to_list()
 
+    # https://stackoverflow.com/questions/21771133/finding-non-numeric-rows-in-dataframe-in-pandas
+    
     num_df = (
         df.drop(df_columns, axis=1)
           .join(df[df_columns].apply(pd.to_numeric, errors='coerce'))
