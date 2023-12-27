@@ -16,7 +16,7 @@ def train_classifiers(classifiers, x, y, cv, scoring, scaler=None):
 
 
         # Use cross_validate to obtain scores
-        scores = cross_validate(pipe, x, y, cv=cv, scoring=scoring, n_jobs=-1, return_train_score=False)
+        scores = cross_validate(pipe, x, y, cv=cv, scoring=scoring, n_jobs=None, return_train_score=False)
 
         results[classifier.__class__.__name__] = {
             'Accuracy': stats.fmean(scores['test_Accuracy']),
