@@ -43,16 +43,22 @@ def train_classifiers_tuned(classifiers, x, y, cv, search_cv, scoring, param_gri
 
         # GridSearchCV with refit on F1-score
         grid_search = GridSearchCV(pipe, param_grid=param_grid, scoring=scoring,
-                                   cv=search_cv, refit=make_scorer(f1_score, average = 'weighted'), n_jobs=-1)
+                                   cv=search_cv, refit='F1-score', n_jobs=-1)
 
         # Use cross_validate to obtain scores
         scores = cross_validate(grid_search, x, y, cv=cv, scoring=scoring, n_jobs=-1, return_train_score=False)
+
+        # Obtain the best parameters and best estimator from the refit attribute
+        best_params = grid_search.best_params_
+        best_estimator = grid_search.refit
 
         results[classifier.__class__.__name__] = {
             'Accuracy': stats.fmean(scores['test_Accuracy']),
             'F1-score': stats.fmean(scores['test_F1-score']),
             'G-Mean score': stats.fmean(scores['test_G-Mean score']),
-            'Fit time': sum(scores['fit_time'])
+            'Fit time': sum(scores['fit_time']),
+            'Best Parameters': best_params,
+            'Best Estimator': best_estimator
         }
 
     return results
