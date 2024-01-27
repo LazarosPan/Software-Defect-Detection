@@ -2,9 +2,13 @@ import numpy as np
 
 def optimize_dtypes(df):
   """
-  Finds the optimal data type for each variable in a DataFrame. The 'np.iinfo(), np.finfo()' functions are used to obtain the minimum and maximum values for the data types accurately, ensuring better compatibility across different systems.
+  Finds the optimal data type for each variable in a DataFrame.
+  
+  The 'np.iinfo(), np.finfo()' functions are used to obtain the minimum and maximum values 
+  for the data types accurately, ensuring better compatibility across different systems.
+  If the data type of the column is non-numeric, the function ignores it and goes to the next column.
 
-  Args:
+  Parameters:
     df: A pandas DataFrame.
 
   Returns:
@@ -16,8 +20,9 @@ def optimize_dtypes(df):
     # Get the data type of the column.
     column_type = df[column].dtype
 
-    # Determine the optimal data type for the column.
-    if column_type in ('int8', 'int16', 'int32' , 'int64', 'uint8', 'uint16' , 'uint32', 'uint64', 'float16', 'float32', 'float64'):
+    # Determine data types.
+    if column_type in ('int8', 'int16', 'int32' , 'int64', 'uint8', 'uint16' , 'uint32', 'uint64', 
+                       'float16', 'float32', 'float64'):
       # Calculate the minimum and maximum values of the column.
       min_value = df[column].min()
       max_value = df[column].max()
